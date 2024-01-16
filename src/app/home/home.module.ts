@@ -5,9 +5,16 @@ import { RouterModule } from '@angular/router';
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
-  declarations: [HomeComponent, ProductsComponent, ProductComponent, ProductDetailsComponent],
+  declarations: [
+    HomeComponent,
+    ProductsComponent,
+    ProductComponent,
+    ProductDetailsComponent,
+    CartComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -27,6 +34,10 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
             component: ProductDetailsComponent,
           },
         ],
+      },
+      {
+        path: 'cart',
+        component: CartComponent,
       },
       {
         path: '**',

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../products/products.component';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { CartService } from 'src/app/shared/services/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -11,14 +12,15 @@ import { ProductService } from 'src/app/shared/services/product.service';
 export class ProductDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private cartService: CartService
   ) {}
   product: Product | null = null;
   URL = this.productService.URL;
   ngOnInit(): void {
     this.route.params.subscribe((data) => {
       this.product = this.productService.productList.find(
-        (product) => (product.id == data['id'])
+        (product) => product.id == data['id']
       )!;
       if (!this.product) {
         this.productService
@@ -28,5 +30,9 @@ export class ProductDetailsComponent implements OnInit {
           });
       }
     });
+  }
+
+  addToCart() {
+    this.cartService.addToCart(this.product!);
   }
 }

@@ -1,0 +1,23 @@
+<div class="border rounded mb-3 mt-3 p-1">
+  <span class="text-secondary">You may find your product here</span>
+</div>
+<div>
+  <div class="card-deck">
+    <div class="card" *ngFor="let product of productList">
+      <img
+        class="card-img-top"
+        src="{{ BASE_URL + product.attributes.image.data?.attributes?.url }}"
+        alt="Card image cap"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ product.attributes.title }}</h5>
+        <p class="card-text">
+          {{ product.attributes.description }}
+        </p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">{{ product.attributes.updatedAt }}</small>
+      </div>
+    </div>
+  </div>
+</div>

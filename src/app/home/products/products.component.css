@@ -1,0 +1,9 @@
+.card-img-top {
+  width: 90%;
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+  display: flex;
+  padding: 1vh;
+  margin-left: auto;
+  margin-right: auto;
+}

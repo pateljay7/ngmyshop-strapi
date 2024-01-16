@@ -1,5 +1,6 @@
-.card-img-top {
+img {
   width: 90%;
+  height: 50%;
   border-top-left-radius: calc(0.25rem - 1px);
   border-top-right-radius: calc(0.25rem - 1px);
   display: flex;

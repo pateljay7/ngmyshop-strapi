@@ -1,8 +1,13 @@
 <div class="border rounded mb-3 mt-3 p-1">
   <span class="text-secondary">You may find your product here</span>
 </div>
-<div>
-  <div class="card-deck">
+<div class="d-flex row">
+  <div *ngFor="let product of productList">
+    <app-product [product]="product"></app-product>
+  </div>
+</div>
+<!-- <div>
+  <div class="card-deck shadow">
     <div class="card" *ngFor="let product of productList">
       <img
         class="card-img-top"
@@ -10,14 +15,31 @@
         alt="Card image cap"
       />
       <div class="card-body">
-        <h5 class="card-title">{{ product.attributes.title }}</h5>
-        <p class="card-text">
-          {{ product.attributes.description }}
+        <h5 class="text-primary">
+          {{ product.attributes.title }}
+        </h5>
+        <div class="d-flex justify-content-between align-items-start flex-wrap">
+          <small class="border border-warning rounded pr-1 pl-1">
+            {{ product.attributes.category }}
+          </small>
+          <small class="border border-info rounded pr-1 pl-1">
+            {{ product.attributes.color }}
+          </small>
+        </div>
+        <br />
+        <p class="card-text text-secondary">
+          {{ product.attributes.description || "-" }}
         </p>
+        <div class="d-flex justify-content-between">
+          <button class="btn btn-primary btn-sm">Buy Now</button>
+        </div>
       </div>
       <div class="card-footer">
-        <small class="text-muted">{{ product.attributes.updatedAt }}</small>
+        <small class="text-muted"
+          >Last updated on <br />
+          {{ product.attributes.updatedAt | date : "dd-MM-YYYY HH:mm" }}</small
+        >
       </div>
     </div>
   </div>
-</div>
+</div> -->

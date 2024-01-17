@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartItems, CartService } from 'src/app/shared/services/cart.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { Product } from '../products/products.component';
@@ -12,7 +12,8 @@ import { Product } from '../products/products.component';
 export class CartComponent implements OnInit {
   constructor(
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router
   ) {}
   URL = this.productService.URL;
   cartItems: CartItems = {};
@@ -36,5 +37,8 @@ export class CartComponent implements OnInit {
   }
   discardItemFromCart(product: Product) {
     this.cartService.discardItemFromCart(product);
+  }
+  redirectToCheckOutPage() {
+    this.router.navigate(['/check-out']);
   }
 }

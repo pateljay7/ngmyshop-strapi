@@ -6,6 +6,7 @@ import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CartComponent } from './cart/cart.component';
+import { CheckOutComponent } from './check-out/check-out.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { CartComponent } from './cart/cart.component';
     ProductComponent,
     ProductDetailsComponent,
     CartComponent,
+    CheckOutComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +40,10 @@ import { CartComponent } from './cart/cart.component';
       {
         path: 'cart',
         component: CartComponent,
+      },
+      {
+        path:'check-out',
+        component:CheckOutComponent
       },
       {
         path: '**',

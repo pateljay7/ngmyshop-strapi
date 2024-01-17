@@ -1,13 +1,16 @@
-.card {
+.card{
   --accent-color: #ffd426;
   position: relative;
-  width: 240px;
+  width: fit-content;
   background: white;
   border-radius: 1rem;
-  padding: 0.3rem;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 50px 30px -20px;
+  padding: 2vh;
+  box-shadow: rgba(100, 100, 110, 0.2) 0px 34px 92px 3px;
   transition: all 0.5s ease-in-out;
+  border: none;
+
 }
+
 
 .card .image-container {
   position: relative;

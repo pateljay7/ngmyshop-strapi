@@ -1,3 +1,35 @@
+<div class="max-w-screen-xl mx-auto px-5 bg-white min-h-sceen">
+  <div class="grid divide-y divide-neutral-500  mx-auto mt-8">
+    <div class="p-3 bg-light rounded shadow">
+      <details class="group">
+        <summary
+          class="flex justify-between items-center font-medium cursor-pointer list-none"
+        >
+          <span class=""> Please check your cart before checking out</span>
+          <span class="mt-3 transition group-open:rotate-180">
+            <svg
+              fill="none"
+              height="24"
+              shape-rendering="geometricPrecision"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+              width="24"
+            >
+              <path d="M6 9l6 6 6-6"></path>
+            </svg>
+          </span>
+        </summary>
+        <div class="group-open:animate-fadeIn">
+          <app-cart></app-cart>
+        </div>
+      </details>
+    </div>
+  </div>
+</div>
+
 <section class="text-gray-600 body-font relative">
   <div class="container px-5 py-24 mx-auto">
     <div class="flex flex-col text-center w-full mb-12">

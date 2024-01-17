@@ -3,12 +3,9 @@
     <div class="py-6">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
         <div class="flex flex-col md:flex-row -mx-4">
-          <div class="md:flex-1 px-4">
-            <div x-data="{ image: 1 }" x-cloak>
-              <div class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4">
-                <div
-                  class="h-30 md:h-50 rounded-lg bg-gray-100 mb-4 flex items-center justify-center"
-                >
+          <div class="md:flex-1 px-4 container-cc">
+              <div>
+                <div>
                   <img
                     src="{{
                       URL + product.attributes.image.data?.attributes?.url
@@ -16,7 +13,6 @@
                   />
                 </div>
               </div>
-            </div>
           </div>
           <div class="md:flex-1 px-4">
             <h2

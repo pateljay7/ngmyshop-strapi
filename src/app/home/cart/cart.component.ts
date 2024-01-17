@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CartService } from 'src/app/shared/services/cart.service';
+import { CartItems, CartService } from 'src/app/shared/services/cart.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { Product } from '../products/products.component';
 
@@ -15,23 +15,26 @@ export class CartComponent implements OnInit {
     private cartService: CartService
   ) {}
   URL = this.productService.URL;
-  cartItems: Product[] = [];
+  cartItems: CartItems = {};
   totalCartValue: number = 0;
   ngOnInit(): void {
-    // this.cartItems = this.cartService.cartItems;
     this.cartService.cartChanged.subscribe((data) => {
       this.cartItems = data;
-      this.totalCartValue = this.cartItems.reduce(
-        (sum, product) => sum + product.attributes.price,
+      this.totalCartValue = Object.values(this.cartItems).reduce(
+        (total, item) => total + item.product.attributes.price * item.qty,
         0
       );
     });
   }
 
-  removeFromCart(index: number) {
-    this.cartService.removeFromCart(index);
+  removeFromCart(product: Product) {
+    this.cartService.removeFromCart(product);
   }
-  addToCart(index: number) {
-    this.cartService.addToCart(this.cartItems[index]);
+  addToCart(id: string) {
+    let r = this.cartItems[id];
+    this.cartService.addToCart(r.product);
+  }
+  discardItemFromCart(product: Product) {
+    this.cartService.discardItemFromCart(product);
   }
 }

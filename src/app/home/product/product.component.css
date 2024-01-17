@@ -37,7 +37,7 @@
   right: 0.7rem;
   bottom: -1rem;
   background: white;
-  color: var(--accent-color);
+  color: #3c3c3c;
   font-weight: 900;
   font-size: 0.9rem;
   padding: 0.5rem;
@@ -237,7 +237,7 @@
   .size-radio
   input:checked
   ~ .name {
-  background: var(--accent-color);
+  background: #ccc;
   border-radius: 2rem 2rem 1.5rem 1.5rem;
   color: white;
 }
@@ -282,7 +282,7 @@
   border-radius: 1.4rem 1.4rem 0.7rem 0.7rem;
   border: none;
   padding: 0.5rem 0;
-  background: var(--accent-color);
+  background: #3c3c3c;
   color: white;
   font-weight: 900;
   cursor: pointer;

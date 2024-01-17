@@ -18,23 +18,25 @@
       <div class="rounded-lg md:w-2/3">
         <div
           class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start"
-          *ngIf="!cartItems.length"
+          *ngIf="!(cartItems | keyvalue).length"
         >
           <p class="text-center">Empty Cart</p>
         </div>
         <div
           class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start"
-          *ngFor="let product of cartItems; let i = index"
+          *ngFor="let product of cartItems | keyvalue; let i = index"
         >
           <img
-            src="{{ URL + product.attributes.image.data?.attributes?.url }}"
+            src="{{
+              URL + product.value.product.attributes.image.data?.attributes?.url
+            }}"
             alt="product-image"
             class="w-full rounded-lg sm:w-40"
           />
           <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
             <div class="mt-5 sm:mt-0">
               <h2 class="text-lg font-bold text-gray-900">
-                {{ product.attributes.title }}
+                {{ product.value.product.attributes.title }}
               </h2>
               <p class="mt-1 text-xs text-gray-700">36EU - 4US</p>
             </div>
@@ -44,24 +46,27 @@
               <div class="flex items-center border-gray-100">
                 <span
                   class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"
+                  (click)="removeFromCart(product.value.product)"
                 >
                   -
                 </span>
                 <input
                   class="h-8 w-8 border bg-white text-center text-xs outline-none"
                   type="number"
-                  value="2"
+                  value="{{ product.value.qty }}"
                   min="1"
                 />
                 <span
                   class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"
-                  (click)="addToCart(i)"
+                  (click)="addToCart(product.key)"
                 >
                   +
                 </span>
               </div>
               <div class="flex items-center space-x-4">
-                <p class="text-sm">{{ product.attributes.price }}</p>
+                <p class="text-sm">
+                  {{ product.value.product.attributes.price }}
+                </p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -69,7 +74,7 @@
                   stroke-width="1.5"
                   stroke="currentColor"
                   class="h-5 w-5 cursor-pointer duration-150 hover:text-red-500"
-                  (click)="removeFromCart(i)"
+                  (click)="discardItemFromCart(product.value.product)"
                 >
                   <path
                     stroke-linecap="round"

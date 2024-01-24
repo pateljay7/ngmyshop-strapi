@@ -10,6 +10,8 @@ import { CheckOutComponent } from './check-out/check-out.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HomePageComponent } from './home-page/home-page.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -21,47 +23,55 @@ import { ReactiveFormsModule } from '@angular/forms';
     CheckOutComponent,
     ContactComponent,
     AboutComponent,
+    HomePageComponent,
   ],
   imports: [
     ReactiveFormsModule,
     CommonModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: '',
         component: HomeComponent,
-      },
-      {
-        path: 'products',
         children: [
           {
             path: '',
-            component: ProductsComponent,
+            component: HomePageComponent,
           },
           {
-            path: ':id',
-            component: ProductDetailsComponent,
+            path: 'products',
+            children: [
+              {
+                path: '',
+                component: ProductsComponent,
+              },
+              {
+                path: ':id',
+                component: ProductDetailsComponent,
+              },
+            ],
+          },
+          {
+            path: 'cart',
+            component: CartComponent,
+          },
+          {
+            path: 'check-out',
+            component: CheckOutComponent,
+          },
+          {
+            path: 'contact',
+            component: ContactComponent,
+          },
+          {
+            path: 'about',
+            component: AboutComponent,
+          },
+          {
+            path: '**',
+            redirectTo: '',
           },
         ],
-      },
-      {
-        path: 'cart',
-        component: CartComponent,
-      },
-      {
-        path: 'check-out',
-        component: CheckOutComponent,
-      },
-      {
-        path: 'contact',
-        component: ContactComponent,
-      },
-      {
-        path: 'about',
-        component: AboutComponent,
-      },
-      {
-        path: '**',
-        redirectTo: '',
       },
     ]),
   ],

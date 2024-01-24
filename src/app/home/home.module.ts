@@ -9,6 +9,7 @@ import { CartComponent } from './cart/cart.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AboutComponent } from './about/about.component';
     AboutComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     RouterModule.forChild([
       {

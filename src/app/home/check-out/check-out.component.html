@@ -1,5 +1,5 @@
 <div class="max-w-screen-xl mx-auto px-5 bg-white min-h-sceen">
-  <div class="grid divide-y divide-neutral-500  mx-auto mt-8">
+  <div class="grid divide-y divide-neutral-500 mx-auto mt-8">
     <div class="p-3 bg-light rounded shadow">
       <details class="group">
         <summary
@@ -31,7 +31,7 @@
 </div>
 
 <section class="text-gray-600 body-font relative">
-  <div class="container px-5 py-24 mx-auto">
+  <div class="container px-5 py-24 mx-auto" [formGroup]="checkOutForm">
     <div class="flex flex-col text-center w-full mb-12">
       <h1
         class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900"
@@ -50,6 +50,7 @@
               >Name</label
             >
             <input
+              formControlName="name"
               type="text"
               id="name"
               name="name"
@@ -63,6 +64,7 @@
               >Email</label
             >
             <input
+              formControlName="email"
               type="email"
               id="email"
               name="email"
@@ -73,9 +75,26 @@
         <div class="p-2 w-full">
           <div class="relative">
             <label for="message" class="leading-7 text-sm text-gray-600"
+              >Phone</label
+            >
+            <input
+              formControlName="phone"
+              id="message"
+              name="message"
+              class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+              data-gramm="false"
+              type="number"
+              wt-ignore-input="true"
+            />
+          </div>
+        </div>
+        <div class="p-2 w-full">
+          <div class="relative">
+            <label for="message" class="leading-7 text-sm text-gray-600"
               >Address</label
             >
             <textarea
+              formControlName="address"
               id="message"
               name="message"
               class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
@@ -86,6 +105,8 @@
         </div>
         <div class="p-2 w-full">
           <button
+            (click)="onCheckOutSubmit()"
+            [disabled]="checkOutForm.invalid"
             class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
           >
             Procced
@@ -95,3 +116,44 @@
     </div>
   </div>
 </section>
+
+<script
+  type="application/javascript"
+  src="https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/{MID}.js"
+  onload="onScriptLoad();"
+  crossorigin="anonymous"
+></script>
+<script>
+  function onScriptLoad() {
+    var config = {
+      root: "",
+      flow: "DEFAULT",
+      data: {
+        orderId: "" /* update order id */,
+        token: "" /* update token value */,
+        tokenType: "TXN_TOKEN",
+        amount: "" /* update amount */,
+      },
+      handler: {
+        notifyMerchant: function (eventName, data) {
+          console.log("notifyMerchant handler function called");
+          console.log("eventName => ", eventName);
+          console.log("data => ", data);
+        },
+      },
+    };
+    if (window.Paytm && window.Paytm.CheckoutJS) {
+      window.Paytm.CheckoutJS.onLoad(function excecuteAfterCompleteLoad() {
+        // initialze configuration using init method
+        window.Paytm.CheckoutJS.init(config)
+          .then(function onSuccess() {
+            // after successfully updating configuration, invoke JS Checkout
+            window.Paytm.CheckoutJS.invoke();
+          })
+          .catch(function onError(error) {
+            console.log("error => ", error);
+          });
+      });
+    }
+  }
+</script>

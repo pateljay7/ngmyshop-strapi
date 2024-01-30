@@ -19,24 +19,25 @@ export class CartComponent implements OnInit {
   cartItems: CartItems = {};
   totalCartValue: number = 0;
   ngOnInit(): void {
+    this.cartService.fetchCartList().subscribe();
     this.cartService.cartChanged.subscribe((data) => {
       this.cartItems = data;
       this.totalCartValue = Object.values(this.cartItems).reduce(
-        (total, item) => total + item.product.attributes.price * item.qty,
+        (total, item) => total + item.product.attributes.price * item.quantity,
         0
       );
     });
   }
 
   removeFromCart(product: Product) {
-    this.cartService.removeFromCart(product);
+    this.cartService.removeFromCart(product).subscribe();
   }
   addToCart(id: string) {
     let r = this.cartItems[id];
-    this.cartService.addToCart(r.product);
+    this.cartService.addToCart(r.product).subscribe();
   }
   discardItemFromCart(product: Product) {
-    this.cartService.discardItemFromCart(product);
+    this.cartService.discardItemFromCart(product).subscribe();
   }
   redirectToCheckOutPage() {
     this.router.navigate(['/check-out']);

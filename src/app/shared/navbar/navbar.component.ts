@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.cartService.cartChanged.subscribe((data) => {
       this.totalItemsInCart = Object.values(data).reduce(
-        (total, item) => total + item.qty,
+        (total, item) => total + item.quantity,
         0
       );
     });

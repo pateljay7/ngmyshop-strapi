@@ -33,7 +33,7 @@ import { ResolveLoggedUserGuard } from '../shared/guards/resolve-logged-user.gua
     RouterModule.forChild([
       {
         path: '',
-        canActivate: [ResolveLoggedUserGuard],
+        // canActivate: [ResolveLoggedUserGuard],
         component: HomeComponent,
         children: [
           {

@@ -22,6 +22,6 @@ export class ProductComponent {
     this.route.navigate(['/products', this.product?.id]);
   }
   addToCart(product: Product) {
-    this.cartService.addToCart(product);
+    this.cartService.addToCart(product).subscribe();
   }
 }

@@ -34,7 +34,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart() {
-    this.cartService.addToCart(this.product!);
+    this.cartService.addToCart(this.product!).subscribe();
   }
   redirectToCheckOutPage() {
     this.router.navigate(['/check-out']);

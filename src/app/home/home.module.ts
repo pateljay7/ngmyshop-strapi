@@ -12,6 +12,7 @@ import { AboutComponent } from './about/about.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SharedModule } from '../shared/shared.module';
+import { ResolveLoggedUserGuard } from '../shared/guards/resolve-logged-user.guard';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { SharedModule } from '../shared/shared.module';
     RouterModule.forChild([
       {
         path: '',
+        canActivate: [ResolveLoggedUserGuard],
         component: HomeComponent,
         children: [
           {

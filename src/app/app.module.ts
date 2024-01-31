@@ -8,6 +8,7 @@ import { authInterceptor } from './shared/interceptors/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
     ToastrModule.forRoot(),
   ],
   providers: [
+    DatePipe,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { ResolveLoggedUserGuard } from '../shared/guards/resolve-logged-user.guard';
+import { TodoComponent } from './todo/todo.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ResolveLoggedUserGuard } from '../shared/guards/resolve-logged-user.gua
     ContactComponent,
     AboutComponent,
     HomePageComponent,
+    TodoComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -68,6 +70,10 @@ import { ResolveLoggedUserGuard } from '../shared/guards/resolve-logged-user.gua
           {
             path: 'about',
             component: AboutComponent,
+          },
+          {
+            path: 'todo',
+            component: TodoComponent,
           },
           {
             path: '**',

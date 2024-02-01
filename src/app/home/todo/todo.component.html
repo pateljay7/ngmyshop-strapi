@@ -1,3 +1,4 @@
+<app-todo-filter-bar (filterCalled)="onFilterChange($event)" ></app-todo-filter-bar>
 <div
   class="max-w-screen-xl mx-auto px-5 mb-5 bg-white min-h-sceen"
   [formGroup]="todoForm"
@@ -81,6 +82,81 @@
       </details>
     </div>
   </div>
+</div>
+
+<div *ngIf="todoList.length">
+  <table class="table m-2">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" sortable="title" (sort)="onSort($event)">
+          Title
+          <i
+            *ngIf="sortColoumn == 'title' && sortDirection == 'desc'"
+            class="bi bi-sort-down"
+          ></i>
+          <i
+            *ngIf="sortColoumn == 'title' && sortDirection == 'asc'"
+            class="bi bi-sort-up-alt"
+          ></i>
+        </th>
+        <th scope="col" sortable="description" (sort)="onSort($event)">
+          Description
+          <i
+            *ngIf="sortColoumn == 'description' && sortDirection == 'desc'"
+            class="bi bi-sort-down"
+          ></i>
+          <i
+            *ngIf="sortColoumn == 'description' && sortDirection == 'asc'"
+            class="bi bi-sort-up-alt"
+          ></i>
+        </th>
+        <th scope="col" sortable="Status" (sort)="onSort($event)">
+          Status
+          <i
+            *ngIf="sortColoumn == 'Status' && sortDirection == 'desc'"
+            class="bi bi-sort-down"
+          ></i>
+          <i
+            *ngIf="sortColoumn == 'Status' && sortDirection == 'asc'"
+            class="bi bi-sort-up-alt"
+          ></i>
+        </th>
+        <th scope="col" sortable="Priority" (sort)="onSort($event)">
+          Prioirity
+          <i
+            *ngIf="sortColoumn == 'Priority' && sortDirection == 'desc'"
+            class="bi bi-sort-down"
+          ></i>
+          <i
+            *ngIf="sortColoumn == 'Priority' && sortDirection == 'asc'"
+            class="bi bi-sort-up-alt"
+          ></i>
+        </th>
+        <th scope="col" sortable="createdAt" (sort)="onSort($event)">
+          Created At
+          <i
+            *ngIf="sortColoumn == 'createdAt' && sortDirection == 'desc'"
+            class="bi bi-sort-down"
+          ></i>
+          <i
+            *ngIf="sortColoumn == 'createdAt' && sortDirection == 'asc'"
+            class="bi bi-sort-up-alt"
+          ></i>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let todo of todoList; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ todo.attributes.title }}</td>
+        <td>{{ todo.attributes.description }}</td>
+        <td>{{ todo.attributes.Status }}</td>
+        <td>{{ todo.attributes.Priority }}</td>
+        <td>{{ todo.attributes.createdAt | date : "dd-mm-yyyy hh:mm a" }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <div>

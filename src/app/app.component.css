@@ -1,0 +1,10 @@
+::ng-deep ng-dropdown-panel {
+  width: fit-content !important;
+}
+
+::ng-deep ng-select{
+  padding: 0px !important;
+}
+::ng-deep ng-select .ng-value-container{
+  width: 0px !important;
+}

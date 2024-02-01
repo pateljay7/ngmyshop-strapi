@@ -13,6 +13,8 @@ export interface Attributes {
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
+  Status: string;
+  Priority: String;
   user: User;
   counter: number;
 }
@@ -50,7 +52,6 @@ export class TodoDetailsComponent implements OnChanges {
     private todoService: TodoService
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('tododd', this.todo);
     this.todoForm = this.formBuilder.group({
       title: this.todo?.attributes.title,
       description: this.todo?.attributes.description,
@@ -68,13 +69,6 @@ export class TodoDetailsComponent implements OnChanges {
   }
 
   onClickSaveTodo() {
-    console.log('data', {
-      ...this.todoForm.value,
-      dueDate: this.datePipe.transform(
-        this.todoForm.value['dueDate'],
-        'yyyy-MM-ddTHH:mm:ss.SSSZ'
-      ),
-    });
     this.todoService.updateTodo(this.todo?.id, this.todoForm.value).subscribe({
       next: (res) => {},
     });

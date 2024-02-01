@@ -12,8 +12,7 @@ import { AboutComponent } from './about/about.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SharedModule } from '../shared/shared.module';
-import { ResolveLoggedUserGuard } from '../shared/guards/resolve-logged-user.guard';
-import { TodoComponent } from './todo/todo.component';
+import { NgbdSortableHeader, TodoComponent } from './todo/todo.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +26,7 @@ import { TodoComponent } from './todo/todo.component';
     AboutComponent,
     HomePageComponent,
     TodoComponent,
+    NgbdSortableHeader
   ],
   imports: [
     ReactiveFormsModule,

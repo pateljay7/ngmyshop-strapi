@@ -8,8 +8,10 @@ export class TodoService {
   URL = 'http://localhost:1337';
   constructor(private http: HttpClient) {}
 
-  fetchTodos() {
-    return this.http.get(`${this.URL}/api/todos`);
+  fetchTodos(params?: any) {
+    return this.http.get(`${this.URL}/api/todos`, {
+      params,
+    });
   }
 
   addTodo(data: { title: string; description: string; dueDate: Date }) {

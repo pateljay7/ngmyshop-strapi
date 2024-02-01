@@ -1,0 +1,7 @@
+.hoverable {
+  cursor: pointer;
+}
+.selected-filter {
+  background-color: rgb(217 231 255);
+}
+

@@ -1,0 +1,99 @@
+<div
+  class="m-2 bg-light d-flex row align-items-center flex-wrap"
+  [formGroup]="filterForm"
+>
+  <div class="col col-xl-3 col-lg-4 col-md-6 col-sm-12 p-0">
+    <div class="col text-secondary">Title</div>
+    <div class="col mt-1">
+      <div class="input-group mb-3" formGroupName="title">
+        <input
+          placeholder="type Title"
+          formControlName="value"
+          type="text"
+          class="form-control m-1"
+          aria-describedby="basic-addon2"
+        />
+        <ng-select formControlName="opt" class="p-1">
+          <ng-option
+            [value]="filter.value"
+            *ngFor="let filter of filterMapping"
+          >
+            {{ filter.text }}
+          </ng-option>
+        </ng-select>
+      </div>
+    </div>
+  </div>
+  <div class="col col-xl-3 col-lg-4 col-md-6 col-sm-12 p-0">
+    <div class="col text-secondary">Description</div>
+    <div class="col mt-1">
+      <div class="input-group mb-3" formGroupName="description">
+        <input
+          placeholder="type Description"
+          formControlName="value"
+          type="text"
+          class="form-control m-1"
+          aria-describedby="basic-addon2"
+        />
+        <ng-select formControlName="opt" class="p-1">
+          <ng-option
+            [value]="filter.value"
+            *ngFor="let filter of filterMapping"
+          >
+            {{ filter.text }}
+          </ng-option>
+        </ng-select>
+      </div>
+    </div>
+  </div>
+  <div class="col col-xl-3 col-lg-4 col-md-6 col-sm-12 p-0">
+    <div class="col text-secondary">Status</div>
+    <div class="col mt-1">
+      <div class="input-group mb-3" formGroupName="Status">
+        <input
+          placeholder="type Status"
+          formControlName="value"
+          type="text"
+          class="form-control m-1"
+          aria-describedby="basic-addon2"
+        />
+        <ng-select formControlName="opt" class="p-1">
+          <ng-option
+            [value]="filter.value"
+            *ngFor="let filter of filterMapping"
+          >
+            {{ filter.text }}
+          </ng-option>
+        </ng-select>
+      </div>
+    </div>
+  </div>
+  <div class="col col-xl-3 col-lg-4 col-md-6 col-sm-12 p-0">
+    <div class="col text-secondary">Priority</div>
+    <div class="col mt-1">
+      <div class="input-group mb-3" formGroupName="Priority">
+        <input
+          placeholder="type Priority"
+          formControlName="value"
+          type="text"
+          class="form-control m-1"
+          aria-describedby="basic-addon2"
+        />
+        <ng-select formControlName="opt" class="p-1">
+          <ng-option
+            [value]="filter.value"
+            *ngFor="let filter of filterMapping"
+          >
+            {{ filter.text }}
+          </ng-option>
+        </ng-select>
+      </div>
+    </div>
+  </div>
+  <div class="col col-xl-3 col-lg-4 col-md-6 col-sm-12 p-0">
+    <button class="btn btn-primary mr-2" (click)="onApplyFilter()">
+      Apply
+    </button>
+    <button class="btn btn-danger" (click)="onResetFilter()">Reset</button>
+  </div>
+</div>

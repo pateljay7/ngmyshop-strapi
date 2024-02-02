@@ -1,0 +1,172 @@
+<!-- component -->
+<div
+  *ngIf="profileForm"
+  style="height: fit-content;"
+  class="bg-cream text-charcoal  font-sans leading-normal overflow-x-hidden lg:overflow-auto"
+  [formGroup]="profileForm"
+>
+  <div class="flex-1 md:p-0 lg:pt-8 lg:px-8 md:ml-24 flex flex-col">
+    <section class="bg-cream-lighter p-4 shadow">
+      <form>
+        <div class="md:flex mb-8">
+          <div class="md:w-1/4">
+            <legend class="uppercase tracking-wide text-sm">User</legend>
+          </div>
+          <div class="md:flex-1 mt-2 mb:mt-0 md:px-3">
+            <div class="mb-4">
+              <label
+                class="block uppercase tracking-wide text-charcoal-darker text-xs font-bold"
+                >Email</label
+              >
+              <input
+                formControlName="email"
+                class="w-full shadow-inner p-4 border-0"
+                type="email"
+                name="email"
+                placeholder="email"
+              />
+            </div>
+            <div class="md:flex mb-4">
+              <div class="md:flex-1 md:pr-3">
+                <label class="block uppercase tracking-wide text-xs font-bold"
+                  >Username</label
+                >
+                <input
+                  formControlName="username"
+                  class="w-full shadow-inner p-4 border-0"
+                  type="text"
+                  name="username"
+                  placeholder="username"
+                />
+              </div>
+              <div class="md:flex-1 md:pl-3">
+                <label
+                  class="block uppercase tracking-wide text-charcoal-darker text-xs font-bold"
+                  >Mobile No.</label
+                >
+                <input
+                  formControlName="mobile"
+                  class="w-full shadow-inner p-4 border-0"
+                  type="number"
+                  name="mobile"
+                  placeholder="mobile no."
+                />
+              </div>
+            </div>
+            <div class="md:flex mb-4">
+              <div class="md:flex-1 md:pr-3">
+                <label class="block uppercase tracking-wide text-xs font-bold"
+                  >Created At</label
+                >
+                <p class="w-full shadow-inner p-4 border-0">
+                  {{
+                    profileForm.get("createdAt")?.value
+                      | date : "dd-mm-yyyy hh:mm a"
+                  }}
+                </p>
+              </div>
+              <div class="md:flex-1 md:pl-3">
+                <label
+                  class="block uppercase tracking-wide text-charcoal-darker text-xs font-bold"
+                  >Updated At</label
+                >
+                <p class="w-full shadow-inner p-4 border-0">
+                  {{
+                    profileForm.get("updatedAt")?.value
+                      | date : "dd-mm-yyyy hh:mm a"
+                  }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="md:flex mb-8" formGroupName="address">
+          <div class="md:w-1/4">
+            <legend class="uppercase tracking-wide text-sm">Address</legend>
+            <p class="text-xs font-light text-red">
+              This entire section is required.
+            </p>
+          </div>
+          <div class="md:flex-1 mt-2 mb:mt-0 md:px-3">
+            <div class="mb-4">
+              <label class="block uppercase tracking-wide text-xs font-bold"
+                >Address Line 1</label
+              >
+              <input
+                formControlName="addressLine1"
+                class="w-full shadow-inner p-4 border-0"
+                type="text"
+                name="name"
+                placeholder="address line 1"
+              />
+            </div>
+            <div class="mb-4">
+              <label class="block uppercase tracking-wide text-xs font-bold"
+                >Address Line 2</label
+              >
+              <input
+                formControlName="addressLine2"
+                class="w-full shadow-inner p-4 border-0"
+                type="text"
+                name="name"
+                placeholder="address line 2"
+              />
+            </div>
+            <div class="md:flex mb-4">
+              <div class="md:flex-1 md:pr-3">
+                <label
+                  class="block uppercase tracking-wide text-charcoal-darker text-xs font-bold"
+                  >Landmark</label
+                >
+                <input
+                  formControlName="landmark"
+                  class="w-full shadow-inner p-4 border-0"
+                  type="text"
+                  name="landmark"
+                  placeholder="landmark"
+                />
+              </div>
+              <div class="md:flex-1 md:pl-3">
+                <label
+                  class="block uppercase tracking-wide text-charcoal-darker text-xs font-bold"
+                  >State</label
+                >
+                <ng-select formControlName="State" (change)="fetchAllCities($event)">
+                  <ng-option *ngFor="let state of stateList" [value]="state">{{
+                    state
+                  }}</ng-option>
+                </ng-select>
+              </div>
+            </div>
+            <div class="md:flex mb-4">
+              <div class="md:flex-1 md:pr-3">
+                <label
+                  class="block uppercase tracking-wide text-charcoal-darker text-xs font-bold"
+                  >City</label
+                >
+                <ng-select formControlName="City">
+                  <ng-option *ngFor="let city of cityList" [value]="city">{{
+                    city
+                  }}</ng-option>
+                </ng-select>
+              </div>
+              <div class="md:flex-1 md:pl-3">
+                <label
+                  class="block uppercase tracking-wide text-charcoal-darker text-xs font-bold"
+                  >Pin code</label
+                >
+                <input
+                  formControlName="Pincode"
+                  class="w-full shadow-inner p-4 border-0"
+                  type="number"
+                  name="pinCode"
+                  placeholder="pin code"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>

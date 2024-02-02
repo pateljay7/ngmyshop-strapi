@@ -13,6 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { NgbdSortableHeader, TodoComponent } from './todo/todo.component';
+import { ProfileComponent } from './profile/profile.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -26,12 +28,14 @@ import { NgbdSortableHeader, TodoComponent } from './todo/todo.component';
     AboutComponent,
     HomePageComponent,
     TodoComponent,
-    NgbdSortableHeader
+    NgbdSortableHeader,
+    ProfileComponent
   ],
   imports: [
     ReactiveFormsModule,
     CommonModule,
     SharedModule,
+    NgSelectModule,
     RouterModule.forChild([
       {
         path: '',
@@ -74,6 +78,10 @@ import { NgbdSortableHeader, TodoComponent } from './todo/todo.component';
           {
             path: 'todo',
             component: TodoComponent,
+          },
+          {
+            path: 'profile',
+            component: ProfileComponent,
           },
           {
             path: '**',

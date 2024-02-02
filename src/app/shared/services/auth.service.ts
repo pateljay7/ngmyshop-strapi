@@ -39,16 +39,16 @@ export class AuthService {
   URL = 'http://localhost:1337';
   loggedUser: AuthUser | null = null;
   userMe() {
-    return this.http.get(`${this.URL}/api/users/me?populate[role]=true`).pipe(
+    return this.http.get(`${this.URL}/api/users/me?populate[address]=true`).pipe(
       tap((data: any) => {
-        if (this.loggedUser)
-          this.loggedUser = {
-            ...this.loggedUser,
-            user: { ...this.loggedUser.user, role: data },
-          };
-          console.log("user",this.loggedUser);
+        // if (this.loggedUser)
+        //   this.loggedUser = {
+        //     ...this.loggedUser,
+        //     user: { ...this.loggedUser.user, role: data },
+        //   };
+        //   console.log("user",this.loggedUser);
 
-        this.setUserAuthToLocalStorage(data as AuthUser);
+        // this.setUserAuthToLocalStorage(data as AuthUser);
       })
     );
   }

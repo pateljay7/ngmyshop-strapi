@@ -52,26 +52,6 @@ export class CartComponent implements OnInit {
     this.cartService.discardItemFromCart(product).subscribe();
   }
   redirectToCheckOutPage() {
-    let payload: PaymentData[] = [];
-    for (const key in this.cartItems) {
-      payload.push({
-        price_data: {
-          currency: 'INR',
-          product_data: {
-            name: this.cartItems[key].product.attributes.title,
-          },
-          unit_amount: this.cartItems[key].product.attributes.price * 10.0,
-        },
-        quantity: this.cartItems[key].quantity,
-      });
-    }
-    this.cartService.makePayment(payload).subscribe({
-      next: (res: any) => {
-        if (res) {
-          window.open(res['redirect']);
-        }
-      },
-      error: (error) => {},
-    });
+    this.router.navigate(['check-out']);
   }
 }

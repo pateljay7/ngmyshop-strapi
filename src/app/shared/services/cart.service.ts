@@ -111,4 +111,8 @@ export class CartService {
         })
       );
   }
+
+  makePayment(payload: any) {
+    return this.http.post(`${this.URL}/api/transaction`, payload);
+  }
 }

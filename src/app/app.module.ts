@@ -9,6 +9,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { DatePipe } from '@angular/common';
+import { PaymentModule } from './payment/payment.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { DatePipe } from '@angular/common';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    PaymentModule,
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),

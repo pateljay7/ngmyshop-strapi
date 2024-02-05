@@ -29,7 +29,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     HomePageComponent,
     TodoComponent,
     NgbdSortableHeader,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     ReactiveFormsModule,

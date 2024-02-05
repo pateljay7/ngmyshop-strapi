@@ -13,13 +13,22 @@ export interface CartItems {
 export class CartService {
   constructor(private http: HttpClient, private authService: AuthService) {}
   cartItems: CartItems = {};
+  cartId: number | null = null;
   cartChanged = new BehaviorSubject<CartItems>({});
   URL = 'http://localhost:1337';
 
   addToCart(product: Product) {
+    const user = this.authService.getUserAuthFromLocalStorage();
+    let cart: any[] = [];
+    let url = Object.keys(this.cartItems).length
+      ? this.http.put(`${this.URL}/api/carts/${this.cartId}`, {
+          data: { user: user.user.id, cartItems: cart },
+        })
+      : this.http.post(`${this.URL}/api/carts`, {
+          data: { user: user.user.id, cartItems: cart },
+        });
     if (this.cartItems[product.id]) this.cartItems[product.id].quantity += 1;
     else this.cartItems[product.id] = { product, quantity: 1 };
-    let cart = [];
     for (let key in this.cartItems) {
       if (this.cartItems[key].quantity > 0)
         cart.push({
@@ -27,17 +36,12 @@ export class CartService {
           product: this.cartItems[key].product.id,
         });
     }
-    const user = this.authService.getUserAuthFromLocalStorage();
-    return  this.http
-      .post(`${this.URL}/api/carts`, {
-        data: { user: user.user.id, cartItems: cart },
+    return url.pipe(
+      tap((data: any) => {
+        this.cartId = data.data.id;
+        this.cartChanged.next(this.cartItems);
       })
-      .pipe(
-        tap((data) => {
-          this.cartChanged.next(this.cartItems);
-        })
-      );
-    console.log('Cart', this.cartItems);
+    );
   }
   removeFromCart(product: Product) {
     if (this.cartItems[product.id]) {
@@ -53,16 +57,16 @@ export class CartService {
       });
     }
     const user = this.authService.getUserAuthFromLocalStorage();
-    return this.http
-      .post(`${this.URL}/api/carts`, {
-        data: { user: user.user.id, cartItems: cart },
-      })
-      .pipe(
-        tap((data) => {
-          this.cartChanged.next(this.cartItems);
+    let url = Object.keys(this.cartItems).length
+      ? this.http.put(`${this.URL}/api/carts/${this.cartId}`, {
+          data: { user: user.user.id, cartItems: cart },
         })
-      );
-    this.cartChanged.next(this.cartItems);
+      : this.http.delete(`${this.URL}/api/carts/${this.cartId}`);
+    return url.pipe(
+      tap((data) => {
+        this.cartChanged.next(this.cartItems);
+      })
+    );
   }
   discardItemFromCart(product: Product) {
     if (this.cartItems[product.id]) delete this.cartItems[product.id];
@@ -74,16 +78,16 @@ export class CartService {
       });
     }
     const user = this.authService.getUserAuthFromLocalStorage();
-    return this.http
-      .post(`${this.URL}/api/carts`, {
-        data: { user: user.user.id, cartItems: cart },
-      })
-      .pipe(
-        tap((data) => {
-          this.cartChanged.next(this.cartItems);
+    let url = Object.keys(this.cartItems).length
+      ? this.http.put(`${this.URL}/api/carts/${this.cartId}`, {
+          data: { user: user.user.id, cartItems: cart },
         })
-      );
-    this.cartChanged.next(this.cartItems);
+      : this.http.delete(`${this.URL}/api/carts/${this.cartId}`);
+    return url.pipe(
+      tap((data) => {
+        this.cartChanged.next(this.cartItems);
+      })
+    );
   }
 
   fetchCartList() {
@@ -94,14 +98,16 @@ export class CartService {
       )
       .pipe(
         tap((data: any) => {
-          data.data[0].attributes.cartItems.forEach((item: any) => {
-            this.cartItems[item.product.data.id] = {
-              product: item.product.data,
-              quantity: item.quantity,
-            };
-          });
-          console.log('D', this.cartItems);
-          this.cartChanged.next(this.cartItems);
+          if (data.data.length) {
+            this.cartId = data.data[0].id;
+            data.data[0].attributes.cartItems.forEach((item: any) => {
+              this.cartItems[item.product.data.id] = {
+                product: item.product.data,
+                quantity: item.quantity,
+              };
+            });
+            this.cartChanged.next(this.cartItems);
+          }
         })
       );
   }

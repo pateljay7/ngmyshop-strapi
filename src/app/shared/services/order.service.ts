@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +8,7 @@ import { Injectable } from '@angular/core';
 export class OrderService {
   constructor(private http: HttpClient) {}
   URL = 'http://localhost:1337';
-
+  processingOrder = new Subject();
   makePrePaymentForOrder(payload: any) {
     return this.http.post(`${this.URL}/api/transaction/pre-payment`, payload);
   }

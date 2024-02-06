@@ -106,10 +106,15 @@
         <div class="p-2 w-full">
           <button
             (click)="onCheckOutSubmit()"
-            [disabled]="checkOutForm.invalid"
+            [disabled]="checkOutForm.invalid || isprocessingPayment"
             class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
           >
-            Procced
+            {{ processingMessage }}
+            <div
+              *ngIf="isprocessingPayment"
+              style="border-top-color: transparent"
+              class="w-14 h-8 border-4 border-blue-200 rounded-full animate-spin"
+            ></div>
           </button>
         </div>
       </div>

@@ -29,6 +29,10 @@ export class PaymentSuccessComponent implements OnInit {
         )
         .subscribe({
           next: (res) => {
+            this.orderService.processingOrder.next({
+              order_id: data['params']['order_id'],
+              cart_id: data['params']['cart_id'],
+            });
             this.router.navigate(['/']);
             this.isRedirectionEnable = true;
           },

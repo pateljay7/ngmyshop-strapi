@@ -21,9 +21,21 @@ export class CheckOutComponent implements OnInit {
     private orderService: OrderService
   ) {}
   checkOutForm: FormGroup = this.formBuilder.group({});
-
+  isprocessingPayment: boolean = false;
+  processingOrder: any = null;
+  processingCart: any = null;
+  processingMessage = 'Procced';
   ngOnInit(): void {
     this.setForm();
+    this.orderService.processingOrder.subscribe((data: any) => {
+      if (
+        data.order_id == this.processingOrder.id &&
+        data.cartId == this.processingCart.id
+      ) {
+        this.isprocessingPayment = false;
+        this.processingMessage = 'Order Placed';
+      }
+    });
   }
 
   setForm() {
@@ -42,6 +54,9 @@ export class CheckOutComponent implements OnInit {
   }
 
   onCheckOutSubmit() {
+    this.isprocessingPayment = true;
+    this.processingMessage =
+      'please do not close this tab, will redirect you to once done with payment';
     let line_items: PaymentData[] = [];
     for (const key in this.cartService.cartItems) {
       line_items.push({
@@ -63,7 +78,10 @@ export class CheckOutComponent implements OnInit {
     };
     this.orderService.makePrePaymentForOrder(payload).subscribe({
       next: (res: any) => {
-        window.open(res.redirect);
+        this.isprocessingPayment = true;
+        this.processingCart = res.cart;
+        this.processingOrder = res.order;
+        window.open(res.redirect, '_blank');
       },
       error: (error) => {
         console.log('error', error);

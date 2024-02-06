@@ -1,0 +1,14 @@
+.order-header {
+  font-size: 22px;
+  font-weight: bold;
+}
+.order-date {
+  font-weight: 500;
+}
+
+.carousel-indicators .active{
+  background-color: rgb(65, 65, 65) !important;
+}
+.carousel-indicators .bg-secondarys{
+  background-color: rgba(219, 219, 219, 0.582);
+}

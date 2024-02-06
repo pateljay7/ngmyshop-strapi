@@ -15,6 +15,7 @@ import { SharedModule } from '../shared/shared.module';
 import { NgbdSortableHeader, TodoComponent } from './todo/todo.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     TodoComponent,
     NgbdSortableHeader,
     ProfileComponent,
+    OrderComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -82,6 +84,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
           {
             path: 'profile',
             component: ProfileComponent,
+          },
+          {
+            path: 'order',
+            component: OrderComponent,
           },
           {
             path: '**',

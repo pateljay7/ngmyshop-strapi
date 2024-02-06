@@ -10,11 +10,16 @@
       [attr.data-target]="'#carouselExampleIndicators{{ i }}'"
       [attr.data-slide-to]="k"
       class="bg-secondarys"
-      [ngClass]="k==0?'active':''"
+      [ngClass]="k == 0 ? 'active' : ''"
     ></li>
   </ol>
   <div>
-    <h2 class="order-header">#Order {{ order.id }}</h2>
+    <div class="d-flex">
+      <h2 class="order-header">#Order {{ order.id }}</h2>
+      <span class="btn btn-outline-primary btn-sm ml-2">
+        <a [routerLink]="['../order/details',order.id]">more</a>
+      </span>
+    </div>
     <span class="order-date">
       {{
         order.attributes.deliveredOn

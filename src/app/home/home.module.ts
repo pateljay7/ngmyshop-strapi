@@ -16,6 +16,7 @@ import { NgbdSortableHeader, TodoComponent } from './todo/todo.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { OrderComponent } from './order/order.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { OrderComponent } from './order/order.component';
     NgbdSortableHeader,
     ProfileComponent,
     OrderComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -87,7 +89,16 @@ import { OrderComponent } from './order/order.component';
           },
           {
             path: 'order',
-            component: OrderComponent,
+            children: [
+              {
+                path: 'details/:id',
+                component: OrderDetailsComponent,
+              },
+              {
+                path: '',
+                component: OrderComponent,
+              },
+            ],
           },
           {
             path: '**',

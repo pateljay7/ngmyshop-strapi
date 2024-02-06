@@ -6,9 +6,13 @@
   font-weight: 500;
 }
 
-.carousel-indicators .active{
+.carousel-indicators .active {
   background-color: rgb(65, 65, 65) !important;
 }
-.carousel-indicators .bg-secondarys{
+.carousel-indicators .bg-secondarys {
   background-color: rgba(219, 219, 219, 0.582);
+}
+.carousel-control-prev {
+  top: 42px !important;
+  bottom: 5px !important;
 }

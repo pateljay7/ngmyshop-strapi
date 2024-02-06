@@ -15,6 +15,9 @@ export class OrderService {
       `${this.URL}/api/orders?fields[0]=status&fields[1]=estimatedDeliveryDate&fields[2]=deliveredOn&fields[3]=product`
     );
   }
+  fetchCompleteOrderDetail(id: string) {
+    return this.http.get(`${this.URL}/api/orders/${id}`);
+  }
 
   makePrePaymentForOrder(payload: any) {
     return this.http.post(`${this.URL}/api/transaction/pre-payment`, payload);

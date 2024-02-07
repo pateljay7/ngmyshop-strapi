@@ -3,6 +3,7 @@ import { Product } from '../products/products.component';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { Route, Router } from '@angular/router';
 import { CartService } from 'src/app/shared/services/cart.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product',
@@ -16,7 +17,7 @@ export class ProductComponent {
     private cartService: CartService
   ) {}
   @Input() product: Product | null = null;
-  BASE_URL = this.productService.URL;
+  BASE_URL = environment.BASE_URL;
 
   viewProductDetail() {
     this.route.navigate(['/products', this.product?.id]);

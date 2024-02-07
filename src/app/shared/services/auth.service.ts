@@ -2,6 +2,7 @@ import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 export interface AuthUser {
   jwt: string;
   user: User;
@@ -36,25 +37,25 @@ export class AuthService {
     private HttpBackend: HttpBackend,
     private router: Router
   ) {}
-  URL = 'http://localhost:1337';
   loggedUser: AuthUser | null = null;
   userMe() {
-    return this.http.get(`${this.URL}/api/users/me?populate[address]=true`).pipe(
-      tap((data: any) => {
-        // if (this.loggedUser)
-        //   this.loggedUser = {
-        //     ...this.loggedUser,
-        //     user: { ...this.loggedUser.user, role: data },
-        //   };
-        //   console.log("user",this.loggedUser);
-
-        // this.setUserAuthToLocalStorage(data as AuthUser);
-      })
-    );
+    return this.http
+      .get(`${environment.BASE_URL}/api/users/me?populate[address]=true`)
+      .pipe(
+        tap((data: any) => {
+          // if (this.loggedUser)
+          //   this.loggedUser = {
+          //     ...this.loggedUser,
+          //     user: { ...this.loggedUser.user, role: data },
+          //   };
+          //   console.log("user",this.loggedUser);
+          // this.setUserAuthToLocalStorage(data as AuthUser);
+        })
+      );
   }
 
   userLogin(data: { identifier: string; password: string }) {
-    return this.http.post(`${this.URL}/api/auth/local`, data).pipe(
+    return this.http.post(`${environment.BASE_URL}/api/auth/local`, data).pipe(
       tap((data) => {
         this.loggedUser = data as AuthUser;
         this.setUserAuthToLocalStorage(data as AuthUser);
@@ -63,7 +64,7 @@ export class AuthService {
   }
   userRegister(data: { username: string; email: string; password: string }) {
     const http = new HttpClient(this.HttpBackend);
-    return http.post(`${this.URL}/api/auth/local/register`, data);
+    return http.post(`${environment.BASE_URL}/api/auth/local/register`, data);
   }
 
   setUserAuthToLocalStorage(data: AuthUser) {

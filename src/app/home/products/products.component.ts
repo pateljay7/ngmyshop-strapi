@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { environment } from 'src/environments/environment';
 
 export interface Product {
   id: number;
@@ -82,7 +83,7 @@ export interface Thumbnail {
 export class ProductsComponent implements OnInit {
   constructor(private productService: ProductService) {}
   productList: Product[] = [];
-  BASE_URL = this.productService.URL;
+  BASE_URL = environment.BASE_URL;
   ngOnInit(): void {
     this.productService.fetchProducts().subscribe({
       next: (res: any) => {

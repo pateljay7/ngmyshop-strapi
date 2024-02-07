@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject, tap } from 'rxjs';
 import { Product } from 'src/app/home/products/products.component';
 import { AuthService } from './auth.service';
+import { environment } from 'src/environments/environment';
 
 export interface CartItems {
   [key: string]: { product: Product; quantity: number };
@@ -15,16 +16,15 @@ export class CartService {
   cartItems: CartItems = {};
   cartId: number | null = null;
   cartChanged = new BehaviorSubject<CartItems>({});
-  URL = 'http://localhost:1337';
 
   addToCart(product: Product) {
     const user = this.authService.getUserAuthFromLocalStorage();
     let cart: any[] = [];
     let url = Object.keys(this.cartItems).length
-      ? this.http.put(`${this.URL}/api/carts/${this.cartId}`, {
+      ? this.http.put(`${environment.BASE_URL}/api/carts/${this.cartId}`, {
           data: { user: user.user.id, cartItems: cart },
         })
-      : this.http.post(`${this.URL}/api/carts`, {
+      : this.http.post(`${environment.BASE_URL}/api/carts`, {
           data: { user: user.user.id, cartItems: cart },
         });
     if (this.cartItems[product.id]) this.cartItems[product.id].quantity += 1;
@@ -58,10 +58,10 @@ export class CartService {
     }
     const user = this.authService.getUserAuthFromLocalStorage();
     let url = Object.keys(this.cartItems).length
-      ? this.http.put(`${this.URL}/api/carts/${this.cartId}`, {
+      ? this.http.put(`${environment.BASE_URL}/api/carts/${this.cartId}`, {
           data: { user: user.user.id, cartItems: cart },
         })
-      : this.http.delete(`${this.URL}/api/carts/${this.cartId}`);
+      : this.http.delete(`${environment.BASE_URL}/api/carts/${this.cartId}`);
     return url.pipe(
       tap((data) => {
         this.cartChanged.next(this.cartItems);
@@ -79,10 +79,10 @@ export class CartService {
     }
     const user = this.authService.getUserAuthFromLocalStorage();
     let url = Object.keys(this.cartItems).length
-      ? this.http.put(`${this.URL}/api/carts/${this.cartId}`, {
+      ? this.http.put(`${environment.BASE_URL}/api/carts/${this.cartId}`, {
           data: { user: user.user.id, cartItems: cart },
         })
-      : this.http.delete(`${this.URL}/api/carts/${this.cartId}`);
+      : this.http.delete(`${environment.BASE_URL}/api/carts/${this.cartId}`);
     return url.pipe(
       tap((data) => {
         this.cartChanged.next(this.cartItems);
@@ -94,7 +94,7 @@ export class CartService {
     const user = this.authService.getUserAuthFromLocalStorage();
     return this.http
       .get(
-        `${this.URL}/api/carts?filters[user][id][$eq]=${user.user.id}&populate[cartItems][populate][product][populate][image]=true`
+        `${environment.BASE_URL}/api/carts?filters[user][id][$eq]=${user.user.id}&populate[cartItems][populate][product][populate][image]=true`
       )
       .pipe(
         tap((data: any) => {
@@ -113,6 +113,6 @@ export class CartService {
   }
 
   makePayment(payload: any) {
-    return this.http.post(`${this.URL}/api/transaction/pre-payment`, payload);
+    return this.http.post(`${environment.BASE_URL}/api/transaction/pre-payment`, payload);
   }
 }

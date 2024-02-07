@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrderService } from 'src/app/shared/services/order.service';
+import { environment } from 'src/environments/environment';
 export interface OrderDetails {
   id: number;
   attributes: Attributes;
@@ -196,7 +197,7 @@ export class OrderDetailsComponent implements OnInit {
     private orderService: OrderService,
     private route: ActivatedRoute
   ) {
-    this.URL = this.orderService.URL;
+    this.URL = environment.BASE_URL;
   }
   ngOnInit(): void {
     this.route.paramMap.subscribe((data: any) => {

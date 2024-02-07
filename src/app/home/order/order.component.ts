@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from 'src/app/shared/services/order.service';
+import { environment } from 'src/environments/environment';
 export interface Order {
   id: number;
   attributes: Attributes;
@@ -78,7 +79,7 @@ export class OrderComponent implements OnInit {
   orderList: Order[] = [];
   URL: string = '';
   constructor(private orderService: OrderService) {
-    this.URL = this.orderService.URL;
+    this.URL = environment.BASE_URL;
   }
 
   ngOnInit(): void {

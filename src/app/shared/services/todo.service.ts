@@ -1,29 +1,29 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
-  URL = 'http://localhost:1337';
   constructor(private http: HttpClient) {}
 
   fetchTodos(params?: any) {
-    return this.http.get(`${this.URL}/api/todos`, {
+    return this.http.get(`${environment.BASE_URL}/api/todos`, {
       params,
     });
   }
 
   addTodo(data: { title: string; description: string; dueDate: Date }) {
-    return this.http.post(`${this.URL}/api/todos`, { data });
+    return this.http.post(`${environment.BASE_URL}/api/todos`, { data });
   }
   deleteTodo(id: any) {
-    return this.http.delete(`${this.URL}/api/todos/${id}`);
+    return this.http.delete(`${environment.BASE_URL}/api/todos/${id}`);
   }
   updateTodo(
     id: any,
     data: { title: string; description: string; dueDate: Date }
   ) {
-    return this.http.put(`${this.URL}/api/todos/${id}`, { data });
+    return this.http.put(`${environment.BASE_URL}/api/todos/${id}`, { data });
   }
 }

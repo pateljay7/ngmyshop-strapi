@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CartItems, CartService } from 'src/app/shared/services/cart.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { Product } from '../products/products.component';
+import { environment } from 'src/environments/environment';
 export interface PaymentData {
   price_data: PriceData;
   quantity: number;
@@ -27,7 +28,7 @@ export class CartComponent implements OnInit {
     private cartService: CartService,
     private router: Router
   ) {}
-  URL = this.productService.URL;
+  URL = environment.BASE_URL;
   cartItems: CartItems = {};
   totalCartValue: number = 0;
   ngOnInit(): void {

@@ -1,26 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
   constructor(private http: HttpClient) {}
-  URL = 'http://localhost:1337';
   processingOrder = new Subject();
 
   fetchOrder() {
     return this.http.get(
-      `${this.URL}/api/orders?fields[0]=status&fields[1]=estimatedDeliveryDate&fields[2]=deliveredOn&fields[3]=product`
+      `${environment.BASE_URL}/api/orders?fields[0]=status&fields[1]=estimatedDeliveryDate&fields[2]=deliveredOn&fields[3]=product`
     );
   }
   fetchCompleteOrderDetail(id: string) {
-    return this.http.get(`${this.URL}/api/orders/${id}`);
+    return this.http.get(`${environment.BASE_URL}/api/orders/${id}`);
   }
 
   makePrePaymentForOrder(payload: any) {
-    return this.http.post(`${this.URL}/api/transaction/pre-payment`, payload);
+    return this.http.post(`${environment.BASE_URL}/api/transaction/pre-payment`, payload);
   }
   setPrePaymentConfirmation(
     order_id: string,
@@ -28,7 +28,7 @@ export class OrderService {
     session_id: string
   ) {
     return this.http.post(
-      `${this.URL}/api/transaction/success`,
+      `${environment.BASE_URL}/api/transaction/success`,
       {},
       {
         params: {

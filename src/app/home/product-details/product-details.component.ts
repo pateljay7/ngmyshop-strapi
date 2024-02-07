@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../products/products.component';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { CartService } from 'src/app/shared/services/cart.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-details',
@@ -17,7 +18,7 @@ export class ProductDetailsComponent implements OnInit {
     private router: Router
   ) {}
   product: Product | null = null;
-  URL = this.productService.URL;
+  URL = environment.BASE_URL;
   ngOnInit(): void {
     this.route.params.subscribe((data) => {
       this.product = this.productService.productList.find(

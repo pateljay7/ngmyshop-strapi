@@ -36,7 +36,10 @@ export class AuthService {
     private http: HttpClient,
     private HttpBackend: HttpBackend,
     private router: Router
-  ) {}
+  ) {
+    console.log("auth");
+
+  }
   loggedUser: AuthUser | null = null;
   userMe() {
     return this.http

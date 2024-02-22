@@ -11,6 +11,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { DatePipe } from '@angular/common';
 import { PaymentModule } from './payment/payment.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { CheckForUpdateService } from './shared/services/check-for-update.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,6 +38,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       useClass: authInterceptor,
       multi: true,
     },
+    // CheckForUpdateService
   ],
   bootstrap: [AppComponent],
 })

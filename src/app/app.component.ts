@@ -11,8 +11,9 @@ import { concat, first, interval } from 'rxjs';
 export class AppComponent {
   title = 'ng-my-shop';
   updateFound: boolean = false;
+  isUpdating: boolean = false;
   constructor(
-    appRef: ApplicationRef,
+    private appRef: ApplicationRef,
     private updates: SwUpdate,
     private tosterService: ToastrService
   ) {
@@ -49,8 +50,9 @@ export class AppComponent {
     // });
   }
   async updateAPP() {
-    console.log("da");
-
+    this.isUpdating = true;
     await this.updates.activateUpdate();
+    this.isUpdating = false;
+    document.location.reload();
   }
 }

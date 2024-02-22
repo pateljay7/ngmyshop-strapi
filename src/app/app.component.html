@@ -1,4 +1,6 @@
-<button *ngIf="updateFound" (click)="updateAPP()">Update</button>
+<button *ngIf="updateFound" class="btn btn-danger" (click)="updateAPP()">
+  {{ isUpdating ? "Updating app" : "update now" }}
+</button>
 <!-- <app-navbar></app-navbar>
 <div class="container-fluid">
   <div class="row flex-nowrap" style="height: 100%; margin-bottom: 10vh">

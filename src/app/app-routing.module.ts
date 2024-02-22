@@ -12,13 +12,13 @@ const routes: Routes = [
   },
   {
     path: 'payment',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadChildren: () =>
       import('../app/payment/payment.module').then((m) => m.PaymentModule),
   },
   {
     path: '',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadChildren: () =>
       import('../app/home/home.module').then((m) => m.HomeModule),
   },

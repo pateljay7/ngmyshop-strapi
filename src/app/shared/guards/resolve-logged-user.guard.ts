@@ -10,7 +10,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 // @Injectable({
@@ -34,8 +34,8 @@ import { AuthService } from '../services/auth.service';
 @Injectable()
 class PermissionsService {
   constructor(private authService: AuthService) {}
-  canActivate(): boolean {
-    return true;
+  canActivate(): Observable<Boolean> {
+    return of(true);
     // return new Promise((resolve, reject) => {
     //   this.authService.userMe().subscribe((data) => {
     //     resolve(true);
@@ -52,5 +52,5 @@ export const ResolveLoggedUserGuard: CanActivateFn = (
   | Promise<boolean | UrlTree>
   | boolean
   | UrlTree => {
-  return inject(AuthService).userMe()
+  return inject(AuthService).userMe();
 };

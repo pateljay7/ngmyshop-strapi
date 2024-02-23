@@ -1,6 +1,6 @@
-import { ApplicationRef, Component } from '@angular/core';
+import { ApplicationRef, Component, OnInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import { ToastrService } from 'ngx-toastr';
+import { ActiveToast, ToastrService } from 'ngx-toastr';
 import { concat, first, interval } from 'rxjs';
 
 @Component({
@@ -8,10 +8,12 @@ import { concat, first, interval } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'ng-my-shop';
   updateFound: boolean = false;
   isUpdating: boolean = false;
+  isOnline: boolean = false;
+  tost: ActiveToast<any> | null = null;
   constructor(
     private appRef: ApplicationRef,
     private updates: SwUpdate,
@@ -49,10 +51,28 @@ export class AppComponent {
     //   }
     // });
   }
+  ngOnInit(): void {
+    this.updateOnlineStatus();
+    window.addEventListener('online', this.updateOnlineStatus.bind(this));
+    window.addEventListener('offline', this.updateOnlineStatus.bind(this));
+  }
   async updateAPP() {
     this.isUpdating = true;
     await this.updates.activateUpdate();
     this.isUpdating = false;
     document.location.reload();
+  }
+  updateOnlineStatus(): void {
+    this.isOnline = window.navigator.onLine;
+    console.info(`isOnline=[${this.isOnline}]`);
+    if (!this.isOnline)
+      this.tost = this.tosterService.error('Seems like you are offline', '', {
+        disableTimeOut: true,
+        closeButton: false,
+        timeOut: 0,
+        extendedTimeOut: 0,
+        tapToDismiss: false,
+      });
+    else if (this.tost) this.tosterService.clear(this.tost.toastId);
   }
 }

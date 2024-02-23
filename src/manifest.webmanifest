@@ -1,9 +1,9 @@
 {
-  "name": "ng-my-shop",
+  "name": "Your shop",
   "short_name": "ng-my-shop",
   "theme_color": "#000000",
   "background_color": "#fafafa",
-  "display": "standalone",
+  "display": "minimal-ui",
   "scope": "./",
   "start_url": "./",
   "icons": [
